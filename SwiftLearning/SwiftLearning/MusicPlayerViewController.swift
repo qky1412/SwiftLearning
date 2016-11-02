@@ -16,7 +16,10 @@ class MusicPlayerViewController: UIViewController {
     @IBOutlet weak var sliderTime: UISlider!
     @IBOutlet weak var labelCurrentTime: UILabel!
     @IBOutlet weak var labelTotalTime: UILabel!
+    @IBOutlet weak var mScrollView: UIScrollView!
+    @IBOutlet weak var mPageControl: UIPageControl!
     
+    let cellId = "trackCell"
     
     var player:AVPlayer!
     var updater : CADisplayLink! = nil
@@ -44,11 +47,43 @@ class MusicPlayerViewController: UIViewController {
     }
 
     func initViews() {
+        navigationController?.navigationBar.tintColor = UIColor.appPrimaryColor()
+        navigationController?.navigationBar.barTintColor = UIColor.appBlackColor()
+        view.backgroundColor = UIColor.appBlackColor()
+        mScrollView.contentSize = CGSize(width: 2 * self.view.bounds.size.width, height: mScrollView.bounds.size.height)
+        mScrollView.delegate = self
+        let size = mScrollView.bounds.size
+        let pageList = UIView()
+        //pageList.backgroundColor = UIColor.green
+        pageList.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let trackListTableView = UITableView(frame: pageList.frame, style: .plain)
+        trackListTableView.backgroundColor = UIColor.clear
+        trackListTableView.delegate = self
+        trackListTableView.dataSource = self
+        trackListTableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellId)
+        trackListTableView.tableFooterView = UIView()
+        pageList.addSubview(trackListTableView)
+        mScrollView.addSubview(pageList)
         if tracks.count == 0 {
             btnNext.isEnabled = false
             btnPlay.isEnabled = false
             btnNext.isEnabled = false
         }
+        
+        let pageLP = UIView()
+        //pageLP.backgroundColor = UIColor.black
+        pageLP.frame = CGRect(x: size.width, y: 0, width: size.width, height: size.height)
+        let lpView = Bundle.main.loadNibNamed("LPView", owner: self, options: nil)?.first as! LPView
+        lpView.backgroundColor = UIColor.clear
+        lpView.frame = CGRect(x: 0, y: 0, width: pageLP.frame.width, height: pageLP.frame.height)
+        pageLP.addSubview(lpView)
+        
+        
+        mScrollView.addSubview(pageLP)
+        
+        mPageControl.numberOfPages = 2
+        mPageControl.currentPage = 0
+        mPageControl.addTarget(self, action: #selector(MusicPlayerViewController.pageControlChanged(sender:)), for: .valueChanged)
     }
     
     func initData() {
@@ -92,6 +127,13 @@ class MusicPlayerViewController: UIViewController {
         btnPlay.setTitle("Pause", for: .normal)
     }
     
+    func pageControlChanged(sender: UIPageControl) {
+        var frame = mScrollView.frame
+        frame.origin.x = frame.size.width * CGFloat(sender.currentPage)
+        frame.origin.y = 0
+        mScrollView.scrollRectToVisible(frame, animated:true)
+    }
+    
     @IBAction func toggleMusic(_ sender: Any) {
         if player.rate == 1 {
             player.pause()
@@ -131,5 +173,28 @@ class MusicPlayerViewController: UIViewController {
         
         changeTrack(track: tracks[currentTrackIndex])
         
+    }
+}
+extension MusicPlayerViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(mScrollView.contentOffset.x / mScrollView.frame.size.width)
+        mPageControl.currentPage = page
+    }
+}
+
+extension MusicPlayerViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tracks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId)! as UITableViewCell
+        cell.textLabel?.text = tracks[indexPath.row].title
+        cell.backgroundColor = UIColor.clear
+        return cell
     }
 }

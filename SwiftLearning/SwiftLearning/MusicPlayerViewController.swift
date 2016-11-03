@@ -25,6 +25,8 @@ class MusicPlayerViewController: UIViewController {
     var updater : CADisplayLink! = nil
     var tracks = [Track(title: "将军令", mediaUrl: "http://hifimedia.oss-cn-hangzhou.aliyuncs.com/%E5%90%B4%E5%85%8B%E7%BE%A3%20-%20%E5%B0%86%E5%86%9B%E4%BB%A4.mp3"), Track(title: "宝贝", mediaUrl: "http://hifimedia.oss-cn-hangzhou.aliyuncs.com/web/tunes/%E8%8E%AB%E6%96%87%E8%94%9A%20-%20%E5%AE%9D%E8%B4%9D.mp3")]
     var currentTrackIndex = 0
+    
+    var lpView: LPView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class MusicPlayerViewController: UIViewController {
         super.viewWillDisappear(animated)
         player.pause()
         btnPlay.setTitle("Play", for: .normal)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,11 +76,10 @@ class MusicPlayerViewController: UIViewController {
         let pageLP = UIView()
         //pageLP.backgroundColor = UIColor.black
         pageLP.frame = CGRect(x: size.width, y: 0, width: size.width, height: size.height)
-        let lpView = Bundle.main.loadNibNamed("LPView", owner: self, options: nil)?.first as! LPView
-        lpView.backgroundColor = UIColor.clear
-        lpView.frame = CGRect(x: 0, y: 0, width: pageLP.frame.width, height: pageLP.frame.height)
-        pageLP.addSubview(lpView)
-        
+        lpView = Bundle.main.loadNibNamed("LPView", owner: self, options: nil)?.first as? LPView
+        lpView?.backgroundColor = UIColor.clear
+        lpView?.frame = CGRect(x: 0, y: 0, width: pageLP.frame.width, height: pageLP.frame.height)
+        pageLP.addSubview(lpView!)
         
         mScrollView.addSubview(pageLP)
         
@@ -125,6 +127,7 @@ class MusicPlayerViewController: UIViewController {
         self.labelTotalTime.text = String(format: "%@:%@", totalMinsString, totalSecsString)
         player.play()
         btnPlay.setTitle("Pause", for: .normal)
+        lpView?.rotate360Degrees(duration: 33.3, completionDelegate: nil)
     }
     
     func pageControlChanged(sender: UIPageControl) {
@@ -138,10 +141,11 @@ class MusicPlayerViewController: UIViewController {
         if player.rate == 1 {
             player.pause()
             btnPlay.setTitle("Play", for: .normal)
+            lpView?.pauseAnimation()
         } else {
             player.play()
             btnPlay.setTitle("Pause", for: .normal)
-            
+            lpView?.resumeAnimation()
         }
     }
 

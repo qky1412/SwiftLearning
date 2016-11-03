@@ -13,7 +13,7 @@
 		2D235A891DC8743B00645B84 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D235A881DC8743B00645B84 /* MusicPlayerViewController.swift */; };
 		2D235A8C1DC88AA400645B84 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D235A8B1DC88AA400645B84 /* AVFoundation.framework */; };
 		2D235A8F1DC995A900645B84 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D235A8E1DC995A900645B84 /* Track.swift */; };
-		2D235A911DC9D17200645B84 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D235A901DC9D17200645B84 /* ColorExtension.swift */; };
+		2D235A911DC9D17200645B84 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D235A901DC9D17200645B84 /* Extension.swift */; };
 		2D235A951DC9DCEC00645B84 /* LPView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D235A941DC9DCEC00645B84 /* LPView.xib */; };
 		2D235A971DC9DE5700645B84 /* LPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D235A961DC9DE5700645B84 /* LPView.swift */; };
 		2D31305D1DC4363A0007B665 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D31305C1DC4363A0007B665 /* AppDelegate.swift */; };
@@ -31,7 +31,7 @@
 		2D235A881DC8743B00645B84 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		2D235A8B1DC88AA400645B84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2D235A8E1DC995A900645B84 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		2D235A901DC9D17200645B84 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		2D235A901DC9D17200645B84 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		2D235A941DC9DCEC00645B84 /* LPView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPView.xib; sourceTree = "<group>"; };
 		2D235A961DC9DE5700645B84 /* LPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LPView.swift; path = Views/LPView.swift; sourceTree = "<group>"; };
 		2D3130591DC4363A0007B665 /* SwiftLearning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLearning.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +122,7 @@
 				2D3130671DC4363A0007B665 /* LaunchScreen.storyboard */,
 				2D31306A1DC4363A0007B665 /* Info.plist */,
 				2D235A881DC8743B00645B84 /* MusicPlayerViewController.swift */,
-				2D235A901DC9D17200645B84 /* ColorExtension.swift */,
+				2D235A901DC9D17200645B84 /* Extension.swift */,
 			);
 			path = SwiftLearning;
 			sourceTree = "<group>";
@@ -206,7 +206,7 @@
 				2D235A8F1DC995A900645B84 /* Track.swift in Sources */,
 				2D235A871DC8490600645B84 /* CellInterface.swift in Sources */,
 				2D235A891DC8743B00645B84 /* MusicPlayerViewController.swift in Sources */,
-				2D235A911DC9D17200645B84 /* ColorExtension.swift in Sources */,
+				2D235A911DC9D17200645B84 /* Extension.swift in Sources */,
 				2D3130611DC4363A0007B665 /* SecondViewController.swift in Sources */,
 				2D235A831DC8478600645B84 /* MainItemTableViewCell.swift in Sources */,
 				2D31305D1DC4363A0007B665 /* AppDelegate.swift in Sources */,
